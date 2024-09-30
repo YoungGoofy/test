@@ -8,13 +8,9 @@ import (
 	"github.com/YoungGoofy/MusicLib/internal/handlers"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-
-	_ "my-song-library/docs"
-	ginSwagger "github.com/swaggo/gin-swagger"
-	swaggerFiles "github.com/swaggo/files"
 )
 
-func App() {
+func main() {
 	// Загружаем .env
     err := godotenv.Load()
     if err != nil {
@@ -32,7 +28,6 @@ func App() {
 	r.PUT("/songs/:id", handlers.UpdateSong)
 	r.GET("/songs", handlers.GetSongs)
 
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	log.Println("Starting server on http://localhost:8080")
     log.Fatal(http.ListenAndServe(":8080", r))
